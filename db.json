@@ -1,0 +1,29 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Keyboard",
+      "price": 1200,
+      "stock": 5
+    },
+    {
+      "id": "2",
+      "name": "Mouse",
+      "price": 650,
+      "stock": 10
+    },
+    {
+      "id": "3",
+      "name": "USB-C Dock",
+      "price": 3490,
+      "stock": 3
+    },
+    {
+      "name": "AAA",
+      "price": 11,
+      "stock": 11,
+      "id": "BCBat2x_B7g"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
