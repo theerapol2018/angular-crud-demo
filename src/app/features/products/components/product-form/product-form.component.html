@@ -1,0 +1,38 @@
+<form class="form-grid" [formGroup]="form" (ngSubmit)="save()">
+  <div class="field">
+    <label for="product-name">Name</label>
+    <input id="product-name" type="text" formControlName="name" autocomplete="off" />
+
+    @if (hasError('name', 'required')) {
+      <p class="field-error" role="alert">Name is required.</p>
+    }
+    @if (hasError('name', 'maxlength')) {
+      <p class="field-error" role="alert">Name must be 120 characters or fewer.</p>
+    }
+  </div>
+
+  <div class="field">
+    <label for="product-price">Price</label>
+    <input id="product-price" type="number" min="0" formControlName="price" />
+
+    @if (hasError('price', 'min')) {
+      <p class="field-error" role="alert">Price must be 0 or more.</p>
+    }
+  </div>
+
+  <div class="field">
+    <label for="product-stock">Stock</label>
+    <input id="product-stock" type="number" min="0" step="1" formControlName="stock" />
+
+    @if (hasError('stock', 'min') || hasError('stock', 'positiveInteger')) {
+      <p class="field-error" role="alert">Stock must be a whole number of 0 or more.</p>
+    }
+  </div>
+
+  <div class="button-row">
+    <button type="submit" [disabled]="form.invalid || form.pending || saving()">
+      {{ saving() ? 'Saving...' : 'Save' }}
+    </button>
+    <button type="button" class="secondary" (click)="canceled.emit()">Cancel</button>
+  </div>
+</form>

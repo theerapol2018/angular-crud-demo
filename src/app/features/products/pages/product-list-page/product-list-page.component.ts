@@ -7,77 +7,7 @@ import { ProductStoreService } from '../../data-access/product-store.service';
 @Component({
   selector: 'app-product-list-page',
   imports: [CurrencyPipe, RouterLink],
-  template: `
-    <section class="page">
-      <div class="page-header">
-        <div class="page-title">
-          <h1>Products</h1>
-          <p>Manage prices and stock for the demo catalog.</p>
-        </div>
-        <a class="button" routerLink="/products/new">Create product</a>
-      </div>
-
-      @if (store.error()) {
-        <p class="alert" role="alert">{{ store.error() }}</p>
-      }
-
-      <div class="panel">
-        <div class="summary-bar">
-          <span>Total stock</span>
-          <strong>{{ store.totalStock() }}</strong>
-        </div>
-
-        @if (store.loading()) {
-          <p class="loading-state">Loading...</p>
-        } @else {
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th class="numeric">Price</th>
-                  <th class="numeric">Stock</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (product of store.products(); track product.id) {
-                  <tr>
-                    <td>{{ product.name }}</td>
-                    <td class="numeric">
-                      {{ product.price | currency: 'THB' : 'symbol-narrow' : '1.0-0' }}
-                    </td>
-                    <td class="numeric">{{ product.stock }}</td>
-                    <td>
-                      <div class="button-row">
-                        <a class="button secondary" [routerLink]="['/products', product.id, 'edit']"
-                          >Edit</a
-                        >
-                        <button
-                          class="danger"
-                          type="button"
-                          [disabled]="store.saving()"
-                          (click)="deleteProduct(product.id)"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                } @empty {
-                  <tr>
-                    <td colspan="4">
-                      <p class="empty-state">No products.</p>
-                    </td>
-                  </tr>
-                }
-              </tbody>
-            </table>
-          </div>
-        }
-      </div>
-    </section>
-  `,
+  templateUrl: './product-list-page.component.html',
 })
 export class ProductListPageComponent implements OnInit {
   readonly store = inject(ProductStoreService);

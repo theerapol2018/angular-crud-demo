@@ -10,36 +10,7 @@ import { Product, ProductUpdate } from '../../models/product.model';
 @Component({
   selector: 'app-product-edit-page',
   imports: [ProductFormComponent, RouterLink],
-  template: `
-    <section class="page">
-      <div class="page-header">
-        <div class="page-title">
-          <h1>Edit product</h1>
-          <p>Update catalog price or stock.</p>
-        </div>
-        <a class="button secondary" routerLink="/products">Back</a>
-      </div>
-
-      @if (store.error()) {
-        <p class="alert" role="alert">{{ store.error() }}</p>
-      }
-
-      <div class="form-panel">
-        @if (loadingProduct()) {
-          <p class="status-message">Loading...</p>
-        } @else if (notFound()) {
-          <p class="alert" role="alert">Product not found.</p>
-        } @else if (product()) {
-          <app-product-form
-            [product]="product()"
-            [saving]="store.saving()"
-            (submitted)="update($event)"
-            (canceled)="navigateBack()"
-          />
-        }
-      </div>
-    </section>
-  `,
+  templateUrl: './product-edit-page.component.html',
 })
 export class ProductEditPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
